@@ -1,0 +1,26 @@
+{
+  "name": "template-node-js",
+  "version": "1.0.0",
+  "description": "Build sample web app with node-js",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cong4696/template-node-js.git"
+  },
+  "author": "Taro Oppa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cong4696/template-node-js/issues"
+  },
+  "homepage": "https://github.com/Cong4696/template-node-js#readme",
+  "dependencies": {
+    "ejs": "^2.6.2",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
