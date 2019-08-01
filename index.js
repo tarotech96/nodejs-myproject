@@ -9,7 +9,8 @@ app.use(express.static(path.join(__dirname + '/public')))
   .use(bodyParser.json())
   .set('view engine', 'ejs')
   .set('views', 'views')
-  .get('/', (req, res) => { res.render('index') })
+  .get('/', (req, res) => { res.render('login') })
+  .get('/home', (req, res) => { res.render('index') })
 
 // require all routers of your application
 const routers = require('./routers/app_routers');

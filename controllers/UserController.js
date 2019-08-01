@@ -3,7 +3,7 @@ const db = require('../database');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { LocalStorage } = require('node-localstorage');
-const localstorage = new LocalStorage('./scratch');
+const localstorage = new LocalStorage('./localstorage');
 module.exports = {
   // get list users from database
   getAllUser: (req, res) => {
@@ -14,6 +14,7 @@ module.exports = {
         let sql = 'SELECT * FROM users';
         db.query(sql, (err, data) => {
           if (err) {
+            res.sendStatus(500);
             res.json({
               message: 'Get data failed'
             })
@@ -24,7 +25,7 @@ module.exports = {
           });
         });
       }
-    })
+    });
   },
   // insert new user into database
   insertUser: (req, res) => {
@@ -79,7 +80,7 @@ module.exports = {
       password: `${req.body.password}`
     };
     // use sign() method to create token includes: email, password, secret key, expireTime
-    jwt.sign({ userLogin }, 'secret_key', { expiresIn: 60 * 60 }, (error, token) => {
+    jwt.sign({ userLogin }, 'secret_key', { expiresIn: 30 }, (error, token) => {
       if (error) {
         res.sendStatus(403).send('Sorry token forbidden');
       } else {
@@ -103,7 +104,7 @@ module.exports = {
                 localstorage.setItem('token', token);
                 localstorage.setItem('user', JSON.stringify(userLogin));
                 // redirect to home page
-                res.redirect('/');
+                res.redirect('/home');
               } else {
                 res.json({
                   message: 'Password in valid.Please enter again'
@@ -138,7 +139,7 @@ module.exports = {
             res.send('Register Failed');
           } else {
             setTimeout(() => {
-              res.redirect('/login');
+              res.redirect('/');
             }, 2000)
           }
         });
