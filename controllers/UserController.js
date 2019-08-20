@@ -79,6 +79,7 @@ module.exports = {
       email: `${req.body.email}`,
       password: `${req.body.password}`
     };
+    console.log(userLogin);
     // use sign() method to create token includes: email, password, secret key, expireTime
     jwt.sign({ userLogin }, 'secret_key', { expiresIn: 30 }, (error, token) => {
       if (error) {
@@ -103,8 +104,13 @@ module.exports = {
                 // store user info and token in localstorage
                 localstorage.setItem('token', token);
                 localstorage.setItem('user', JSON.stringify(userLogin));
+                res.json({
+                  message: 'Login successfull',
+                  token: token,
+                  userInfo: userLogin
+                });
                 // redirect to home page
-                res.redirect('/home');
+                // res.redirect('/home');
               } else {
                 res.json({
                   message: 'Password in valid.Please enter again'

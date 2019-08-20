@@ -6,6 +6,6 @@ module.exports = (app) => {
     .post('/user/insert', userController.insertUser)
     .put('/user/update/:userId', userController.updateUser)
     .delete('/user/delete/:userId', userController.deleteUser)
-    .post('/', userController.login)
+    .post('/login', userController.login)
     .post('/register', userController.registration)
 }
